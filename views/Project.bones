@@ -168,6 +168,8 @@ view.prototype.makeStylesheet = function(model) {
             }
         }).bind(this)
     });
+    model.codemirror.setOption('onCursorActivity',
+        cartoColor(model.codemirror).onCursorActivity);
     $(model.codemirror.getWrapperElement())
         .addClass(id)
         .addClass(model.collection.indexOf(model) === 0 ? 'active' : '');
