@@ -6,6 +6,7 @@
     function cartoColor(editor) {
 
         var delay = null;
+        var cp = null;
 
         function cancelEvent(e) {
             if (!e) return;
@@ -18,6 +19,7 @@
             // Find the token at the cursor
             // If it's not a 'word-style' token, ignore the token.
             if (editor.somethingSelected()) return;
+            if (cp) cp.destroy();
 
             var cur = editor.getCursor(false),
                 token = editor.getTokenAt(cur),
@@ -64,11 +66,12 @@
             }
 
             var hsv = Color.RGB_HSV(css2rgb(token.string));
-            var cp = new Color.Picker({
+            cp = new Color.Picker({
                 hue: hsv.H,
                 sat: hsv.S,
                 val: hsv.V,
                 element: widget,
+                size: 100,
                 callback: _(function(hex) {
                     insert('#' + hex);
                 }).bind(this)
