@@ -1,5 +1,4 @@
-var assert = require('assert'),
-    fs = require('fs');
+var fs = require('fs');
 
 function readJSON(name) {
     var json = fs.readFileSync('./test/fixtures/' + name + '.json', 'utf8');
@@ -8,7 +7,7 @@ function readJSON(name) {
 
 require('./support/start')(function(command) {
 
-    exports['test sqlite datasource'] = function() {
+    exports['test sqlite datasource'] = function(beforeExit, assert) {
         assert.response(command.servers['Core'],
             { url: '/api/Datasource/world?file=' + encodeURIComponent(__dirname + '/fixtures/countries.sqlite') + '&table=countries&id=world&type=sqlite&project=demo_01&srs=null' },
             { status: 200 },
@@ -20,7 +19,7 @@ require('./support/start')(function(command) {
         );
     };
 
-    exports['test shapefile datasource'] = function() {
+    exports['test shapefile datasource'] = function(beforeExit, assert) {
         assert.response(command.servers['Core'],
             { url: '/api/Datasource/world?file=http%3A%2F%2Ftilemill-data.s3.amazonaws.com%2Fworld_borders_merc.zip&type=shape&id=world&project=demo_01' },
             { status: 200 },
@@ -31,7 +30,7 @@ require('./support/start')(function(command) {
         );
     };
 
-    exports['test shapefile datasource with features'] = function() {
+    exports['test shapefile datasource with features'] = function(beforeExit, assert) {
         assert.response(command.servers['Core'],
             { url: '/api/Datasource/world?file=http%3A%2F%2Ftilemill-data.s3.amazonaws.com%2Fworld_borders_merc.zip&type=shape&id=world&project=demo_01&features=true' },
             { status: 200 },
@@ -42,7 +41,7 @@ require('./support/start')(function(command) {
         );
     };
 
-    exports['test postgis datasource'] = function() {
+    exports['test postgis datasource'] = function(beforeExit, assert) {
         assert.response(command.servers['Core'],
             { url: '/api/Datasource/postgis?table=admin_0_line_land&key_field=&geometry_field=&extent=-15312095%2C-6980576.5%2C15693558%2C11093272&type=postgis&dbname=tilemill_test&id=postgis&srs=%2Bproj%3Dmerc+%2Ba%3D6378137+%2Bb%3D6378137+%2Blat_ts%3D0.0+%2Blon_0%3D0.0+%2Bx_0%3D0.0+%2By_0%3D0+%2Bk%3D1.0+%2Bunits%3Dm+%2Bnadgrids%3D%40null+%2Bwktext+%2Bno_defs+%2Bover&project=demo_01' },
             { status: 200 },
@@ -53,7 +52,7 @@ require('./support/start')(function(command) {
         );
     };
 
-    exports['test postgis datasource with features'] = function() {
+    exports['test postgis datasource with features'] = function(beforeExit, assert) {
         assert.response(command.servers['Core'],
             { url: '/api/Datasource/postgis?table=admin_0_line_land&key_field=&geometry_field=&extent=-15312095%2C-6980576.5%2C15693558%2C11093272&type=postgis&dbname=tilemill_test&id=postgis&srs=%2Bproj%3Dmerc+%2Ba%3D6378137+%2Bb%3D6378137+%2Blat_ts%3D0.0+%2Blon_0%3D0.0+%2Bx_0%3D0.0+%2By_0%3D0+%2Bk%3D1.0+%2Bunits%3Dm+%2Bnadgrids%3D%40null+%2Bwktext+%2Bno_defs+%2Bover&project=demo_01&features=true' },
             { status: 200 },

@@ -1,7 +1,6 @@
-var assert = require('assert');
 
 require('./support/start')(function(command) {
-    exports['test abilities endpoint'] = function() {
+    exports['test abilities endpoint'] = function(beforeExit, assert) {
         assert.response(command.servers['Core'],
             { url: '/assets/tilemill/js/abilities.js' },
             { status: 200 },

@@ -1,4 +1,3 @@
-var assert = require('assert');
 var fs = require('fs');
 
 function readJSON(name) {
@@ -18,7 +17,7 @@ function cleanProject(proj) {
 }
 
 require('./support/start')(function(command) {
-    exports['test project collection endpoint'] = function() {
+    exports['test project collection endpoint'] = function(beforeExit, assert) {
         assert.response(command.servers['Core'],
             { url: '/api/Project' },
             { status: 200 },
@@ -30,7 +29,7 @@ require('./support/start')(function(command) {
         );
     };
 
-    exports['test project endpoint'] = function(beforeExit) {
+    exports['test project endpoint'] = function(beforeExit, assert) {
         var completed = false;
         assert.response(command.servers['Core'],
             { url: '/api/Project/demo_01' },
@@ -67,7 +66,7 @@ require('./support/start')(function(command) {
         })
     };
 
-    exports['test project creation'] = function(beforeExit) {
+    exports['test project creation'] = function(beforeExit, assert) {
         var completed = false;
         var data = readJSON('create-project');
         assert.response(command.servers['Core'], {
@@ -115,7 +114,7 @@ require('./support/start')(function(command) {
         });
     };
 
-    exports['test project creation with invalid id'] = function() {
+    exports['test project creation with invalid id'] = function(beforeExit, assert) {
         var data = readJSON('create-project');
         data.id = 'Bad !@!ID';
         assert.response(command.servers['Core'], {
@@ -140,7 +139,7 @@ require('./support/start')(function(command) {
         });
     };
 
-    exports['test updating project with invalid stylesheet'] = function() {
+    exports['test updating project with invalid stylesheet'] = function(beforeExit, assert) {
         var data = readJSON('invalid-project');
         assert.response(command.servers['Core'], {
             url: '/api/Project/demo_01',

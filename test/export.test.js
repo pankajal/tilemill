@@ -1,4 +1,3 @@
-var assert = require('assert');
 var fs = require('fs');
 
 function readJSON(name) {
@@ -8,7 +7,7 @@ function readJSON(name) {
 
 require('./support/start')(function(command) {
 
-    exports['test export job creation'] = function(beforeExit) {
+    exports['test export job creation'] = function(beforeExit, assert) {
         var completed = false;
         var created = Date.now()
         var id = String(created);
