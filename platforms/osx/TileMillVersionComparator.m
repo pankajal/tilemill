@@ -1,6 +1,12 @@
-#import "TileMillVersionComparator.h"
+//
+//  TileMillVersionComparator.m
+//  TileMill
+//
+//  Created by Will White on 11/23/11.
+//  Copyright (c) 2011 Development Seed. All rights reserved.
+//
 
-#pragma mark -
+#import "TileMillVersionComparator.h"
 
 @implementation TileMillVersionComparator
 
